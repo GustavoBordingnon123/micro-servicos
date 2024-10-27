@@ -17,7 +17,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./pages/api/**/*.ts'], // Caminho para os arquivos de rotas
+  apis: ['./src/pages/api/**/*.ts'], // Caminho atualizado para os arquivos de rotas
 };
 
 const swaggerSpec = swaggerJsDoc(options);
