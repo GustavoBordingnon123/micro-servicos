@@ -1,32 +1,33 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient as ProductsPrismaClient } from '@prisma/client-products';
+import { PrismaClient as OrdersPrismaClient } from '@prisma/client';
 
-const prisma = new ProductsPrismaClient();
+const prisma = new OrdersPrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        const products = await prisma.product.findMany();
-        return res.status(200).json(products);
+        const orders = await prisma.order.findMany();
+        return res.status(200).json(orders);
       } catch (error) {
         console.error(error); // Log do erro para depuração
-        return res.status(500).json({ error: 'Error fetching products' });
+        return res.status(500).json({ error: 'Error fetching orders' });
       }
 
     case 'POST':
-      const { name, price } = req.body;
+      const { userId, productId, quantity } = req.body;
       try {
-        const newProduct = await prisma.product.create({
+        const newOrder = await prisma.order.create({
           data: {
-            name,
-            price,
+            userId,
+            productId,
+            quantity,
           },
         });
-        return res.status(201).json(newProduct);
+        return res.status(201).json(newOrder);
       } catch (error) {
         console.error(error); // Log do erro para depuração
-        return res.status(500).json({ error: 'Error creating product' });
+        return res.status(500).json({ error: 'Error creating order' });
       }
 
     default:
