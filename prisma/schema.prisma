@@ -1,6 +1,7 @@
+// user-service/prisma/schema.prisma
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL") // mysql://username:password@localhost:3306/login_service
 }
 
 generator client {

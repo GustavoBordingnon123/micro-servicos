@@ -1,0 +1,17 @@
+// product-service/prisma/products.prisma
+datasource db {
+  provider = "mysql"
+  url      = env("PRODUCTS_DATABASE_URL") // mysql://username:password@localhost:3306/products_service
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

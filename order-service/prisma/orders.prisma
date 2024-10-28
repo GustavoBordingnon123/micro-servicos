@@ -1,0 +1,18 @@
+// order-service/prisma/orders.prisma
+datasource db {
+  provider = "mysql"
+  url      = env("ORDERS_DATABASE_URL") // mysql://username:password@localhost:3306/orders_service
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  userId    Int      // ID do usuário que fez o pedido
+  productId Int      // ID do produto que foi pedido
+  quantity  Int      // Quantidade do produto
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
